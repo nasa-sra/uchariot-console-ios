@@ -1,5 +1,5 @@
 //
-//  uchariot_console_iosApp.swift
+//  ConsoleApp.swift
 //  uchariot-console-ios
 //
 //  Created by Davey Adams on 6/18/25.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct uchariot_console_iosApp: App {
+struct ConsoleApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
