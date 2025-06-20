@@ -9,32 +9,40 @@ import SwiftUI
 
 struct ContentView: View {
     @State var ipText = "192.168.5.1"
+    @State var connected = false
     @FocusState private var isFocused: Bool
     
     var body: some View {
-        ZStack {
-            Image("Moonscape")
-                .ignoresSafeArea()
-                .onTapGesture {
-                    isFocused = false
-                }
-            
-            VStack {
-                HStack {
-                    TextField("IP Address", text: $ipText)
-                        .foregroundStyle(.white)
-                        .padding(0)
-                        .keyboardType(.decimalPad)
-                        .autocorrectionDisabled()
-                        .autocapitalization(.none)
-                        .multilineTextAlignment(.center)
-                        .focused($isFocused)
-                }
+        NavigationStack {
+            ZStack {
+                Image("Moonscape")
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        isFocused = false
+                    }
                 
-                Button("Connect") {
-                    isFocused = false
+                VStack {
+                    HStack {
+                        TextField("IP Address", text: $ipText)
+                            .foregroundStyle(.white)
+                            .padding(0)
+                            .keyboardType(.decimalPad)
+                            .autocorrectionDisabled()
+                            .autocapitalization(.none)
+                            .multilineTextAlignment(.center)
+                            .focused($isFocused)
+                    }
+                    
+                    Button {
+                        connected.toggle()
+                    } label: {
+                        Text("Connect")
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
+            }
+            .navigationDestination(isPresented: $connected) {
+                StatusView()
             }
         }
     }
