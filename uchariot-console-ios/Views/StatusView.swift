@@ -9,24 +9,37 @@ import SwiftUI
 
 struct StatusView: View {
     @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        Text("Hello, World!")
-            .navigationBarBackButtonHidden(true)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        HStack {
-                            Image(systemName: "chevron.left")
-                                .font(.body)
-                                .fontWeight(.semibold)
-                                .padding(0)
-                            Text("Disconnect")
-                        }
+        VStack {
+            CameraFeed()
+                .padding()
+            
+            JoystickController()
+            Spacer()
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.left")
+                            .font(.body)
+                            .fontWeight(.semibold)
+                            .padding(0)
+                        
+                        Text("Disconnect")
                     }
                 }
             }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Text("12.8V")
+                    .foregroundStyle(.accent)
+            }
+        }
     }
 }
 
