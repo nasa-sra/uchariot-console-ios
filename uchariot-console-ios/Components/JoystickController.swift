@@ -29,6 +29,7 @@ struct JoystickController: View {
             Image(systemName: "circle")
                 .scaleEffect(3)
                 .frame(width: 300, height: 300)
+                .foregroundStyle(.accent)
                 .onTapGesture { location in
                     print(location.debugDescription)
                 }
@@ -36,6 +37,7 @@ struct JoystickController: View {
             Image(systemName: "circle.fill")
                 .scaleEffect(5)
                 .offset(offset)
+                .foregroundStyle(.accent)
                 .gesture(
                     DragGesture()
                         .onChanged { value in

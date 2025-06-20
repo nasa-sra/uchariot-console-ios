@@ -36,8 +36,12 @@ struct StatusView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                Text("12.8V")
-                    .foregroundStyle(.accent)
+                HStack {
+                    Text("12.8V")
+                        .foregroundStyle(.accent)
+                    Image(systemName: "bolt.batteryblock.fill")
+                        .foregroundStyle(.accent)
+                }
             }
         }
     }

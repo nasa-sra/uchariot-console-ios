@@ -16,9 +16,10 @@ struct CameraFeed: View {
                 .resizable()
             
             if isConnected {
-                HStack {
-                    VStack {
-                        Spacer()
+                VStack {
+                    Spacer()
+                    
+                    HStack {
                         Button {
                             isConnected.toggle()
                         } label: {
@@ -27,9 +28,7 @@ struct CameraFeed: View {
                                 .scaleEffect(2)
                                 .padding()
                         }
-                    }
-                    Spacer()
-                    VStack {
+                        Spacer()
                         CameraButtons()
                     }
                 }
@@ -39,11 +38,11 @@ struct CameraFeed: View {
                 } label: {
                     VStack {
                         Image(systemName: "eye.slash")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.accent)
                             .imageScale(.large)
                             .bold()
                         Text("Tap to enable live feed")
-                            .foregroundStyle(.white)
+                            .foregroundStyle(.accent)
                             .bold()
                     }
                     .padding()

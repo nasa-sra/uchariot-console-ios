@@ -41,8 +41,6 @@ struct CameraButtons: View {
     }
     
     var body: some View {
-        spacer
-        Spacer()
         takeVideo
         Spacer()
         takePhoto
