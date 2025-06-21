@@ -14,10 +14,18 @@ struct CameraButtons: View {
         Button {
             
         } label: {
-            Image(systemName: "circle.fill")
-                .foregroundStyle(.white)
-                .scaleEffect(2)
-                .padding()
+            ZStack {
+                Image(systemName: "circle")
+                    .foregroundStyle(.white)
+                    .scaleEffect(2)
+                    .fontWeight(.light)
+                    .padding()
+                
+                Image(systemName: "circle.fill")
+                    .foregroundStyle(.white)
+                    .scaleEffect(1.5)
+                    .padding()
+            }
         }
     }
     
@@ -25,10 +33,25 @@ struct CameraButtons: View {
         Button {
             isRecording.toggle()
         } label: {
-            Image(systemName: "circle.fill")
-                .foregroundStyle(.red)
-                .scaleEffect(2)
-                .padding()
+            ZStack {
+                Image(systemName: "circle")
+                    .foregroundStyle(.red)
+                    .scaleEffect(2)
+                    .fontWeight(.light)
+                    .padding()
+                
+                if isRecording {
+                    Image(systemName: "square.fill")
+                        .foregroundStyle(.red)
+                        .scaleEffect(1)
+                        .padding()
+                } else {
+                    Image(systemName: "circle.fill")
+                        .foregroundStyle(.red)
+                        .scaleEffect(1.5)
+                        .padding()
+                }
+            }
         }
     }
     
