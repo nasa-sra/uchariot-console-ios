@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct DataView: View {
+    @Binding var robotState: NavigationView.RobotState
+    
     var body: some View {
         Text("Data View")
+            .onAppear {
+                robotState = .disabled
+            }
     }
 }
 
 #Preview {
-    DataView()
+    DataView(robotState: .constant(.disabled))
 }

@@ -9,20 +9,25 @@ import SwiftUI
 
 struct NavigationView: View {
     @Environment(\.dismiss) var dismiss
+    @State private var robotState = RobotState.disabled
+    
+    enum RobotState {
+        case enabled, disabled
+    }
     
     var body: some View {
         TabView {
-            TeleopView()
+            TeleopView(robotState: $robotState)
                 .tabItem {
                     Image(systemName: "gamecontroller.fill")
                     Text("Teleop")
                 }
-            AutonomousView()
+            AutonomousView(robotState: $robotState)
                 .tabItem {
                     Image(systemName: "cpu.fill")
                     Text("Autonomous")
                 }
-            DataView()
+            DataView(robotState: $robotState)
                 .tabItem {
                     Image(systemName: "chart.pie.fill")
                     Text("Data")
@@ -30,7 +35,7 @@ struct NavigationView: View {
         }
         .navigationBarBackButtonHidden(true)
         .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
+            ToolbarItem(placement: .topBarLeading) {
                 Button {
                     dismiss()
                 } label: {
@@ -45,7 +50,21 @@ struct NavigationView: View {
                 }
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .principal) {
+                Button {
+                    if robotState == .enabled {
+                        robotState = .disabled
+                    } else {
+                        robotState = .enabled
+                    }
+                } label: {
+                    Text(robotState == .enabled ? "ENABLED" : "DISABLED")
+                        .foregroundStyle(robotState == .enabled ? .green : .red)
+                        .bold()
+                }
+            }
+            
+            ToolbarItem(placement: .topBarTrailing) {
                 HStack {
                     Text("12.8V")
                         .foregroundStyle(.accent)

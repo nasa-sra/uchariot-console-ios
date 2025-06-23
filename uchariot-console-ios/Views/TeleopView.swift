@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct TeleopView: View {
+    @Binding var robotState: NavigationView.RobotState
+    
     var body: some View {
         VStack {
             CameraFeed()
-                .padding()
-            
             JoystickController()
             Spacer()
+        }
+        .padding([.top])
+        .onAppear {
+            robotState = .disabled
         }
     }
 }
 
 #Preview {
-    TeleopView()
+    TeleopView(robotState: .constant(.disabled))
 }
