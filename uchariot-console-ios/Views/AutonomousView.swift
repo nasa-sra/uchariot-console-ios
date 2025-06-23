@@ -41,7 +41,6 @@ struct AutonomousView: View {
                 }
                 .mapStyle(.hybrid)
                 .mapControls() {
-                    MapUserLocationButton()
                     MapCompass()
                     MapScaleView()
                 }
