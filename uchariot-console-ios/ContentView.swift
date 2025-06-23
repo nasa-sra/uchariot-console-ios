@@ -42,7 +42,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(isPresented: $connected) {
-                StatusView()
+                NavigationView()
             }
         }
     }

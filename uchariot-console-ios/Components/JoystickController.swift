@@ -28,7 +28,7 @@ struct JoystickController: View {
         ZStack {
             Image(systemName: "circle")
                 .scaleEffect(3)
-                .frame(width: 300, height: 300)
+                .frame(width: 300, height: 200)
                 .foregroundStyle(.accent)
                 .onTapGesture { location in
                     print(location.debugDescription)
