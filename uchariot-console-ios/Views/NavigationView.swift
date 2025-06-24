@@ -9,6 +9,7 @@ import SwiftUI
 
 struct NavigationView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.scenePhase) var scenePhase
     @State private var robotState = RobotState.disabled
     
     enum RobotState {
@@ -71,6 +72,11 @@ struct NavigationView: View {
                     Image(systemName: "bolt.batteryblock.fill")
                         .foregroundStyle(.accent)
                 }
+            }
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase == .background || scenePhase == .inactive {
+                robotState = .disabled
             }
         }
     }
