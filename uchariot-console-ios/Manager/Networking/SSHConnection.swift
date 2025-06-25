@@ -42,6 +42,8 @@ class SSHConnection {
         do {
             try await sftp?.close()
             try await client?.close()
+            sftp = nil
+            client = nil
         } catch {
             
         }
