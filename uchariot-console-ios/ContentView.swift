@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     @State var ipText = "192.168.5.1"
     @State var connected = false
+    @State var connecting = false
     @FocusState private var isFocused: Bool
+    @EnvironmentObject var robotManager: RobotManager
     
     var body: some View {
         NavigationStack {
@@ -22,27 +24,44 @@ struct ContentView: View {
                     }
                 
                 VStack {
-                    HStack {
-                        TextField("IP Address", text: $ipText)
-                            .foregroundStyle(.white)
-                            .padding(0)
-                            .keyboardType(.decimalPad)
-                            .autocorrectionDisabled()
-                            .autocapitalization(.none)
-                            .multilineTextAlignment(.center)
-                            .focused($isFocused)
-                    }
+                    TextField("IP Address", text: $ipText)
+                        .foregroundStyle(.white)
+                        .padding(0)
+                        .keyboardType(.decimalPad)
+                        .autocorrectionDisabled()
+                        .autocapitalization(.none)
+                        .multilineTextAlignment(.center)
+                        .focused($isFocused)
                     
                     Button {
-                        connected.toggle()
+                        connecting = true
+                        Task {
+                            await robotManager.connect(ip: ipText)
+                        }
                     } label: {
-                        Text("Connect")
+                        Group {
+                            if connecting {
+                                Text("Connecting...")
+                            } else {
+                                Text("Connect")
+                            }
+                        }
+                        .foregroundStyle(.white)
+                        .padding(8)
                     }
-                    .buttonStyle(.borderedProminent)
+                    .background(.accent, in: RoundedRectangle(cornerRadius: 8))
+                    .disabled(connecting)
+                    .opacity(connecting ? 0.5 : 1.0)
                 }
             }
             .navigationDestination(isPresented: $connected) {
                 NavigationView()
+            }
+            .onChange(of: robotManager.isConnected()) {
+                connected = robotManager.isConnected()
+                if connected {
+                    connecting = false
+                }
             }
         }
     }

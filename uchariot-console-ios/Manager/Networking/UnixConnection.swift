@@ -9,7 +9,7 @@ import Foundation
 import SocketIO
 
 class UnixConnection {
-    let manager = SocketManager(socketURL: URL(string: "")!)
+    var manager: SocketManager? = nil
     var socket: SocketIOClient? = nil
     var connecting = false
     var running = true
@@ -22,7 +22,8 @@ class UnixConnection {
         if !connecting {
             self.connecting = true
             Task {
-                self.socket = manager.defaultSocket
+                self.manager = SocketManager(socketURL: URL(string: host)!)
+                self.socket = manager!.defaultSocket
                 self.socket!.connect(timeoutAfter: 3.0, withHandler: nil)
                 self.socket!.on(clientEvent: .connect) { data, ack in
                     self.connected = true
@@ -88,5 +89,9 @@ class UnixConnection {
     
     func disable() {
         self.sendCommand(cmdName: "disable", data: [])
+    }
+    
+    func disconnect() {
+        self.manager?.disconnect()
     }
 }

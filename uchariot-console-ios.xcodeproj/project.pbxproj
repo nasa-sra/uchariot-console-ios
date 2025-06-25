@@ -17,9 +17,22 @@
 		5AABF6532E03457D0092C8F1 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5A6AF8BD2E0CA31E000C7D84 /* Exceptions for "uchariot-console-ios" folder in "uchariot-console-ios" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5AABF6342E0342910092C8F1 /* uchariot-console-ios */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5AABF6372E0342910092C8F1 /* uchariot-console-ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5A6AF8BD2E0CA31E000C7D84 /* Exceptions for "uchariot-console-ios" folder in "uchariot-console-ios" target */,
+			);
 			path = "uchariot-console-ios";
 			sourceTree = "<group>";
 		};
@@ -271,6 +284,7 @@
 				DEVELOPMENT_TEAM = K6C58N59XJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uchariot-console-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "µchariot";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed for map features";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -303,6 +317,7 @@
 				DEVELOPMENT_TEAM = K6C58N59XJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "uchariot-console-ios/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "µchariot";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Your location is needed for map features";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

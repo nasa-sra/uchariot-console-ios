@@ -10,6 +10,7 @@ import SwiftUI
 struct NavigationView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.scenePhase) var scenePhase
+    @EnvironmentObject var robotManager: RobotManager
     @State private var robotState = RobotState.disabled
     
     enum RobotState {
@@ -38,6 +39,9 @@ struct NavigationView: View {
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
                 Button {
+                    Task {
+                        await robotManager.disconnect()
+                    }
                     dismiss()
                 } label: {
                     HStack {
