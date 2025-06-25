@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A6AF81D2E0B2DD3000C7D84 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 5A6AF81C2E0B2DD3000C7D84 /* SocketIO */; };
+		5A6AF8452E0C7648000C7D84 /* Citadel in Frameworks */ = {isa = PBXBuildFile; productRef = 5A6AF8442E0C7648000C7D84 /* Citadel */; };
 		5AABF6542E0345850092C8F1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5AABF6532E03457D0092C8F1 /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +31,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6AF81D2E0B2DD3000C7D84 /* SocketIO in Frameworks */,
+				5A6AF8452E0C7648000C7D84 /* Citadel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,7 @@
 			name = "uchariot-console-ios";
 			packageProductDependencies = (
 				5A6AF81C2E0B2DD3000C7D84 /* SocketIO */,
+				5A6AF8442E0C7648000C7D84 /* Citadel */,
 			);
 			productName = "uchariot-console-ios";
 			productReference = 5AABF6352E0342910092C8F1 /* uchariot-console-ios.app */;
@@ -105,6 +108,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				5A6AF81B2E0B2DD3000C7D84 /* XCRemoteSwiftPackageReference "socket" */,
+				5A6AF8432E0C7648000C7D84 /* XCRemoteSwiftPackageReference "Citadel" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5AABF6362E0342910092C8F1 /* Products */;
@@ -353,6 +357,14 @@
 				kind = branch;
 			};
 		};
+		5A6AF8432E0C7648000C7D84 /* XCRemoteSwiftPackageReference "Citadel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/orlandos-nl/Citadel.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.11.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -360,6 +372,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5A6AF81B2E0B2DD3000C7D84 /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
+		};
+		5A6AF8442E0C7648000C7D84 /* Citadel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A6AF8432E0C7648000C7D84 /* XCRemoteSwiftPackageReference "Citadel" */;
+			productName = Citadel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
