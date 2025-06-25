@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A6AF81D2E0B2DD3000C7D84 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 5A6AF81C2E0B2DD3000C7D84 /* SocketIO */; };
 		5AABF6542E0345850092C8F1 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 5AABF6532E03457D0092C8F1 /* .gitignore */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A6AF81D2E0B2DD3000C7D84 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			);
 			name = "uchariot-console-ios";
 			packageProductDependencies = (
+				5A6AF81C2E0B2DD3000C7D84 /* SocketIO */,
 			);
 			productName = "uchariot-console-ios";
 			productReference = 5AABF6352E0342910092C8F1 /* uchariot-console-ios.app */;
@@ -100,6 +103,9 @@
 			);
 			mainGroup = 5AABF62C2E0342910092C8F1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				5A6AF81B2E0B2DD3000C7D84 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5AABF6362E0342910092C8F1 /* Products */;
 			projectDirPath = "";
@@ -337,6 +343,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5A6AF81B2E0B2DD3000C7D84 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift/";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5A6AF81C2E0B2DD3000C7D84 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5A6AF81B2E0B2DD3000C7D84 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5AABF62D2E0342910092C8F1 /* Project object */;
 }
