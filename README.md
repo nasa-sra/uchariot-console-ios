@@ -21,6 +21,7 @@ Teleop has the ability to **watch, take video of, and take photos** through the 
 Autonomous has **3 controllers** that can be chosen from that behave differently and shows the **pose of the robot on the map**.
 
 #### Pathing
+
 This is used to **run paths** on the robot.
 
 > To deploy a path, you must use the other console that allows deployment of files. Deploying paths may be supported in the future.
@@ -32,9 +33,12 @@ This is used to **run paths** on the robot.
 * **Reset Heading** - Sets applies offset to gyro to zero heading.
 
 #### Following
+
 This is used to **follow a target**, like a person.
 
-### Summon
+#### Summon
+
 This is used to **summon the robot to a person**.
+
 * Target latitude/longitude - Input the target's approximate GPS location.
 * Summon - Command the robot to move to the target.
