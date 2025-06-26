@@ -11,12 +11,25 @@ struct DataView: View {
     @Binding var robotState: NavigationView.RobotState
     
     var body: some View {
-        Text("Data View")
-            .onAppear {
-                if robotState == .enabled {
-                    robotState = .disabled
-                }
+        VStack {
+            ZStack {
+                Color.gray.opacity(0.25)
+                
+                Text(LogManager.text)
+                    .truncationMode(.head)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    .padding(4)
             }
+            .frame(width: 350, height: 275)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+            
+            Spacer()
+        }
+        .onAppear {
+            if robotState == .enabled {
+                robotState = .disabled
+            }
+        }
     }
 }
 

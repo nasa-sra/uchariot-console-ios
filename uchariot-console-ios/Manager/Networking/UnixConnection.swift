@@ -7,6 +7,7 @@
 
 import Foundation
 import SocketIO
+import SwiftUI
 
 class UnixConnection {
     var manager: SocketManager? = nil
@@ -21,11 +22,13 @@ class UnixConnection {
     func connect(host: String, port: Int, completion: ((Bool) -> ())? = nil) {
         if !connecting {
             self.connecting = true
+            LogManager.log("Connecting to \(host):\(port)")
             Task {
                 self.manager = SocketManager(socketURL: URL(string: host)!)
                 self.socket = manager!.defaultSocket
                 self.socket!.connect(timeoutAfter: 3.0, withHandler: nil)
                 self.socket!.on(clientEvent: .connect) { data, ack in
+                    LogManager.log("Connected to \(host):\(port)")
                     self.connected = true
                 }
                 
@@ -60,6 +63,7 @@ class UnixConnection {
             }
             
             if Int(NSDate().timeIntervalSince1970) - self.lastHeatbeatTime > 500 {
+                LogManager.log("Disconnected from host")
                 self.connected = false
                 self.connectCallback!(false)
             }
@@ -70,16 +74,17 @@ class UnixConnection {
         self.packetCallback = callback
     }
     
-    func setController(_ ctr: String) {
-        if self.connected {
-            var data = ["name": ctr]
-            self.sendCommand(cmdName: "set_controller", data: data)
-        }
-    }
-    
     func sendCommand(cmdName: String, data: SocketData) {
         if self.connected {
             self.socket!.emit(cmdName, data)
+        }
+        LogManager.log("Sent \(cmdName) command")
+    }
+    
+    func setController(_ ctr: String) {
+        if self.connected {
+            let data = ["name": ctr]
+            self.sendCommand(cmdName: "set_controller", data: data)
         }
     }
     
@@ -93,5 +98,6 @@ class UnixConnection {
     
     func disconnect() {
         self.manager?.disconnect()
+        LogManager.log("Disconnected")
     }
 }
