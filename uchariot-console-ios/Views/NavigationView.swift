@@ -13,8 +13,10 @@ struct NavigationView: View {
     @EnvironmentObject var robotManager: RobotManager
     @State private var robotState = RobotState.disabled
     
-    enum RobotState {
-        case enabled, disabled
+    enum RobotState: String {
+        case enabled = "ENABLED"
+        case disabled = "DISABLED"
+        case estopped = "E-STOPPED"
     }
     
     var body: some View {
@@ -57,13 +59,15 @@ struct NavigationView: View {
             
             ToolbarItem(placement: .principal) {
                 Button {
-                    if robotState == .enabled {
-                        robotState = .disabled
-                    } else {
-                        robotState = .enabled
+                    if robotState != .estopped {
+                        if robotState == .enabled {
+                            robotState = .disabled
+                        } else {
+                            robotState = .enabled
+                        }
                     }
                 } label: {
-                    Text(robotState == .enabled ? "ENABLED" : "DISABLED")
+                    Text(robotState.rawValue)
                         .foregroundStyle(robotState == .enabled ? .green : .red)
                         .bold()
                 }
@@ -79,8 +83,12 @@ struct NavigationView: View {
             }
         }
         .onChange(of: scenePhase) {
-            if scenePhase == .background || scenePhase == .inactive {
-                robotState = .disabled
+            if robotState == .enabled {
+                if scenePhase == .inactive {
+                    robotState = .disabled
+                } else if scenePhase == .background {
+                    robotState = .estopped
+                }
             }
         }
     }
