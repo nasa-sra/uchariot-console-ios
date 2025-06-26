@@ -15,6 +15,7 @@ let PASSWORD = "123456"
 class SSHConnection {
     var client: SSHClient? = nil
     var sftp: SFTPClient? = nil
+    var connected = false
     
     func connect(host: String) async {
         if client != nil { return }
@@ -27,18 +28,28 @@ class SSHConnection {
         do {
             LogManager.log("Connecting SSH to \(host)")
             client = try await SSHClient.connect(to: creds)
-            LogManager.log("Connected SSH to \(host)")
+            if client!.isConnected {
+                connected = true
+                LogManager.log("Connected SSH to \(host)")
+            }
         } catch {
+            Task {
+                await close()
+            }
             LogManager.log("Failed SSH connection with \(host)")
         }
     }
     
     func sendCommand(command: String) async {
-        do {
-            let _ = try await client!.executeCommand("sudo -S -p '' \(command)")
-            LogManager.log("Sent SSH command \(command)")
-        } catch {
-            LogManager.log("Failed SSH command \(command)")
+        if connected {
+            do {
+                let _ = try await client!.executeCommand("sudo -S -p '' \(command)")
+                LogManager.log("Sent SSH command \(command)")
+            } catch {
+                LogManager.log("Failed SSH command \(command)")
+            }
+        } else {
+            LogManager.log("Failed SSH command, not connected!")
         }
     }
     
@@ -46,11 +57,12 @@ class SSHConnection {
         do {
             try await sftp?.close()
             try await client?.close()
-            sftp = nil
-            client = nil
         } catch {
             
         }
+        sftp = nil
+        client = nil
+        connected = false
         LogManager.log("Disconnected SSH")
     }
 }

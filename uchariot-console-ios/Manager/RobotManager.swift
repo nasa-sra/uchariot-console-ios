@@ -27,6 +27,6 @@ class RobotManager: ObservableObject {
     }
     
     func isConnected() -> Bool {
-        return unix.connected
+        return unix.connected && ssh.connected
     }
 }
