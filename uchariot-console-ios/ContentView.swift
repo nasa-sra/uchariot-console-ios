@@ -34,11 +34,10 @@ struct ContentView: View {
                         .focused($isFocused)
                     
                     Button {
-//                        connecting = true
-//                        Task {
-//                            await robotManager.connect(ip: ipText)
-//                        }
-                        connected = true
+                        connecting = true
+                        Task {
+                            await robotManager.connect(ip: ipText)
+                        }
                     } label: {
                         Group {
                             if connecting {
