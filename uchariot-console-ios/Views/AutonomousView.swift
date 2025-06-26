@@ -64,10 +64,14 @@ struct AutonomousView: View {
             }
         }
         .onAppear {
-            robotState = .disabled
+            if robotState == .enabled {
+                robotState = .disabled
+            }
         }
         .onChange(of: autonomousModeSelected) {
-            robotState = .disabled
+            if robotState == .enabled {
+                robotState = .disabled
+            }
         }
     }
 }

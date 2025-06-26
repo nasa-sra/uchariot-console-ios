@@ -13,7 +13,9 @@ struct DataView: View {
     var body: some View {
         Text("Data View")
             .onAppear {
-                robotState = .disabled
+                if robotState == .enabled {
+                    robotState = .disabled
+                }
             }
     }
 }

@@ -18,7 +18,9 @@ struct TeleopView: View {
         }
         .padding([.top])
         .onAppear {
-            robotState = .disabled
+            if robotState == .enabled {
+                robotState = .disabled
+            }
         }
     }
 }
