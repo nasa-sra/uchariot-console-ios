@@ -13,7 +13,7 @@ struct ContentView: View {
     @State var connecting = false
     @FocusState private var isFocused: Bool
     @EnvironmentObject var robotManager: RobotManager
-    
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -22,17 +22,16 @@ struct ContentView: View {
                     .onTapGesture {
                         isFocused = false
                     }
-                
+
                 VStack {
                     TextField("IP Address", text: $ipText)
                         .foregroundStyle(.white)
-                        .padding(0)
                         .keyboardType(.decimalPad)
                         .autocorrectionDisabled()
                         .autocapitalization(.none)
                         .multilineTextAlignment(.center)
                         .focused($isFocused)
-                    
+
                     Button {
                         connecting = true
                         Task {
@@ -57,9 +56,9 @@ struct ContentView: View {
             .navigationDestination(isPresented: $connected) {
                 NavigationView()
             }
-            .onChange(of: robotManager.isConnected()) {
-                connected = robotManager.isConnected()
-                if connected {
+            .onReceive(robotManager.$isConnected) { newValue in
+                connected = newValue
+                if newValue {
                     connecting = false
                 }
             }
@@ -68,5 +67,6 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView().environmentObject(RobotManager())
 }
+

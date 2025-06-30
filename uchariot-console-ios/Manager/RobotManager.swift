@@ -9,24 +9,25 @@ import Foundation
 
 @MainActor
 class RobotManager: ObservableObject {
+    @Published var isConnected = false  // ✅ Reactive connection status
+
     private let ssh: SSHConnection
     private let unix: UnixConnection
-    
+
     init() {
         ssh = SSHConnection()
         unix = UnixConnection()
     }
-    
+
     func connect(ip: String) async {
         unix.connect(host: ip, port: 8000)
         await ssh.connect(host: ip)
+        isConnected = unix.connected && ssh.connected  // ✅ Update state
     }
-    
+
     func disconnect() async {
         unix.disable()
-    }
-    
-    func isConnected() -> Bool {
-        return unix.connected && ssh.connected
+        isConnected = false  // ✅ Reset on disconnect
     }
 }
+
