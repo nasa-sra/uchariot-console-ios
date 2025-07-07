@@ -8,19 +8,24 @@
 import SwiftUI
 
 struct JoystickController: View {
+    @EnvironmentObject private var robotManager: RobotManager
     @State private var offset = CGSize.zero
     
-    func normalized(translation: CGSize) -> CGSize {
-        if distance(translation: translation) > 64 {
+    func restrict(_ translation: CGSize) -> CGSize {
+        if distance(translation) > 64 {
             return translation.applying(
                 CGAffineTransform(
-                    scaleX: 64/distance(translation: translation),
-                    y: 64/distance(translation: translation)))
+                    scaleX: 64/distance(translation),
+                    y: 64/distance(translation)))
         }
         return translation
     }
     
-    func distance(translation: CGSize) -> Double {
+    func normalize(_ translation: CGSize) -> CGSize {
+        return translation.applying(CGAffineTransform(scaleX: 1/64, y: -1/64))
+    }
+    
+    func distance(_ translation: CGSize) -> Double {
         return sqrt(translation.width.magnitudeSquared + translation.height.magnitudeSquared)
     }
     
@@ -41,12 +46,16 @@ struct JoystickController: View {
                 .gesture(
                     DragGesture()
                         .onChanged { value in
-                            offset = normalized(translation: value.translation)
+                            offset = restrict(value.translation)
                         }
                         .onEnded { value in
                             offset = CGSize.zero
                         }
                 )
+        }
+        .onChange(of: offset) {
+            let normalized = normalize(offset)
+            robotManager.drive(velocity: normalized.height, rotation: normalized.width)
         }
     }
 }
