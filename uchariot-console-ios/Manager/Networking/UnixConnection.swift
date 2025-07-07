@@ -78,7 +78,6 @@ class UnixConnection {
         if self.connected {
             self.socket!.emit(cmdName, data)
         }
-        LogManager.log("Sent \(cmdName) command")
     }
     
     func setController(_ ctr: String) {

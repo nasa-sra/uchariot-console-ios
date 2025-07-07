@@ -9,13 +9,14 @@ import SwiftUI
 
 struct DataView: View {
     @Binding var robotState: NavigationView.RobotState
+    @State var logText = ""
     
     var body: some View {
         VStack {
             ZStack {
                 Color.gray.opacity(0.25)
                 
-                Text(LogManager.text)
+                Text(logText)
                     .truncationMode(.head)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     .padding(4)
@@ -29,6 +30,9 @@ struct DataView: View {
             if robotState == .enabled {
                 robotState = .disabled
             }
+        }
+        .onChange(of: LogManager.text) {
+            logText = LogManager.text
         }
     }
 }

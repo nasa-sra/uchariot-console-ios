@@ -62,8 +62,10 @@ struct NavigationView: View {
                     if robotState != .estopped {
                         if robotState == .enabled {
                             robotState = .disabled
+                            robotManager.disable()
                         } else {
                             robotState = .enabled
+                            robotManager.enable()
                         }
                     }
                 } label: {
@@ -86,19 +88,11 @@ struct NavigationView: View {
             if robotState == .enabled {
                 if scenePhase == .inactive {
                     robotState = .disabled
+                    robotManager.disable()
                 } else if scenePhase == .background {
                     robotState = .estopped
+                    robotManager.disable(true)
                 }
-            }
-        }
-        .onChange(of: robotState) {
-            switch robotState {
-            case .enabled:
-                robotManager.enable()
-            case .disabled:
-                robotManager.disable()
-            case .estopped:
-                robotManager.disable()
             }
         }
     }

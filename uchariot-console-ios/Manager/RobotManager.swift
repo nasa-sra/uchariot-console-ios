@@ -28,6 +28,7 @@ class RobotManager: ObservableObject {
     func disconnect() async {
         unix.disable()
         isConnected = false  // ✅ Reset on disconnect
+        LogManager.clear()
     }
     
     func enable() {
@@ -35,14 +36,13 @@ class RobotManager: ObservableObject {
         LogManager.log("Enabling")
     }
     
-    func disable() {
+    func disable(_ estopped: Bool = false) {
         unix.disable()
-        LogManager.log("Disabling")
+        LogManager.log(estopped ? "E-Stopping" : "Disabling")
     }
     
     func drive(velocity: Double, rotation: Double) {
-        let data = [velocity: velocity, rotation: rotation]
+        let data = ["velocity": velocity, "rotation": rotation]
         unix.sendCommand(cmdName: "teleop_drive", data: data)
     }
 }
-
