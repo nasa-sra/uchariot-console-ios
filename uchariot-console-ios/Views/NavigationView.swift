@@ -91,6 +91,16 @@ struct NavigationView: View {
                 }
             }
         }
+        .onChange(of: robotState) {
+            switch robotState {
+            case .enabled:
+                robotManager.enable()
+            case .disabled:
+                robotManager.disable()
+            case .estopped:
+                robotManager.disable()
+            }
+        }
     }
 }
 

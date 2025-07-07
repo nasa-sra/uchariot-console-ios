@@ -30,6 +30,16 @@ class RobotManager: ObservableObject {
         isConnected = false  // ✅ Reset on disconnect
     }
     
+    func enable() {
+        unix.enable()
+        LogManager.log("Enabling")
+    }
+    
+    func disable() {
+        unix.disable()
+        LogManager.log("Disabling")
+    }
+    
     func drive(velocity: Double, rotation: Double) {
         let data = [velocity: velocity, rotation: rotation]
         unix.sendCommand(cmdName: "teleop_drive", data: data)
