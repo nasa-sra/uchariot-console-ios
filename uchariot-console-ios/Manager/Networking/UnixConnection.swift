@@ -24,7 +24,7 @@ class UnixConnection {
             self.connecting = true
             LogManager.log("Connecting to \(host):\(port)")
             Task {
-                self.manager = SocketManager(socketURL: URL(string: host)!)
+                self.manager = SocketManager(socketURL: URL(string: "http://\(host):\(port)")!)
                 self.socket = manager!.defaultSocket
                 self.socket!.connect(timeoutAfter: 3.0, withHandler: nil)
                 self.socket!.on(clientEvent: .connect) { data, ack in
@@ -43,7 +43,6 @@ class UnixConnection {
                     self.connectCallback = completion
                     completion!(connected)
                 }
-                
             }
         }
     }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var ipText = "192.168.5.1"
+    @State var ipText = "uchariot-base.local"
     @State var connected = false
     @State var connecting = false
     @FocusState private var isFocused: Bool
